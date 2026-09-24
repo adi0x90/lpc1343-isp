@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "lpc1343-isp"
+version = "0.1.0"
+description = "Unicorn harness for the LPC1343 boot ROM ISP command loop"
+readme = "README.md"
+requires-python = ">=3.11"
+license = "GPL-2.0-only"
+authors = [{ name = "Aditya Gupta" }]
+dependencies = ["unicorn>=2"]
+
+[project.scripts]
+lpc-isp = "lpc1343_isp.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
