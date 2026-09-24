@@ -52,7 +52,7 @@ Lines handled by the harness:
 | `.break` | toggle the floor trace |
 | `.quit` | leave |
 
-An accepted `W` reads the following lines as data and a checksum. That is the ROM's write transfer, so the next typed line is data until the transfer finishes or `.reset` runs.
+An accepted `W` reads the following ISP lines as data and a checksum. `.reset` drops that transfer and starts the command loop again. `.quit` and `.break` stay harness commands during the transfer.
 
 Repeat `--command` to send several lines in one process:
 
