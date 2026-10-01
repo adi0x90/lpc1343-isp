@@ -82,11 +82,13 @@ class FloorHit:
     """Registers at the destination compare inside WriteMemoryHandler.
 
     dest is r3 and floor is r2 at that instruction, before the compare runs.
-    The ROM refuses the write when dest < floor.
+    The ROM refuses the write when dest < floor. at is the compare's own ROM
+    address, the one to hand to Ghidra.
     """
 
     dest: int
     floor: int
+    at: int
 
     @property
     def refused(self) -> bool:
@@ -298,7 +300,7 @@ class LpcMachine:
             if address == FLOOR_CMP and self._floor is None:
                 dest = uc.reg_read(UC_ARM_REG_R3) & 0xFFFFFFFF
                 floor = uc.reg_read(UC_ARM_REG_R2) & 0xFFFFFFFF
-                self._floor = FloorHit(dest, floor)
+                self._floor = FloorHit(dest, floor, address)
             # uart_getc spins here until LSR bit 0 is set. An empty queue means
             # the ROM has finished this line and is blocked on the next byte.
             if address == UART_POLL and not uart.rx:

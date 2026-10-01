@@ -45,7 +45,10 @@ class CliTest(unittest.TestCase):
             )
         self.assertEqual(rc, 0, err.getvalue())
         text = out.getvalue()
-        self.assertIn("floor: dest=0x10000000 floor=0x10000300 -> 19", text)
+        self.assertIn("dest=0x10000000", text)
+        self.assertIn("floor=0x10000300", text)
+        self.assertIn("at=0x1fff0da0", text)
+        self.assertIn("-> 19", text)
         self.assertIn("19", text.splitlines()[-1])
 
         out2 = io.StringIO()
@@ -75,7 +78,7 @@ class CliTest(unittest.TestCase):
                 ]
             )
         self.assertEqual(rc, 0, err.getvalue())
-        self.assertIn("floor: dest=0x10000000 floor=0x10000300 -> 19", out.getvalue())
+        self.assertIn("at=0x1fff0da0", out.getvalue())
 
 
 if __name__ == "__main__":

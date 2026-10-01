@@ -15,7 +15,8 @@ def format_result(result: RunResult, break_floor: bool) -> str:
     if break_floor and result.floor is not None:
         shown = "19" if result.floor.refused else "0"
         parts.append(
-            f"floor: dest={result.floor.dest:#010x} floor={result.floor.floor:#010x} -> {shown}"
+            f"floor: dest={result.floor.dest:#010x} floor={result.floor.floor:#010x} "
+            f"at={result.floor.at:#010x} -> {shown}"
         )
     body = result.text.replace("\r\n", "\n").replace("\r", "\n").strip("\n")
     if body:
